@@ -51,16 +51,13 @@ Assumption is Wikipedia.movies.json, Movies_metadata.csv, and rating.csv good fi
    1. Load the file to object with JSON module function. Assumption JSON return a list of dictionary movie object.
    2. Filter only movies from the list 
       a. Assumption every item in the list is a dictionary. To make sure only extract list item is dictionary item, we can add the type condition
-      
       ```python
       def filter_movies
          ...
          type(movie) == dict
       ...
       ```
-      
       b. Assumption every dictionary item has the similar structure. To make sure to not add the item is not movie dictionary structure, we can skip all bad item 
-      
       ```python
       def clean_movie(movie)
          try:
@@ -68,7 +65,6 @@ Assumption is Wikipedia.movies.json, Movies_metadata.csv, and rating.csv good fi
          except:
       ...
       ```
-      
    3. Load to the list of movies to Panda dataframe (***wiki_movies_df***)
    
 - Movies_metadata.csv: (This will merge with  Wikipedia.movies)
@@ -79,7 +75,8 @@ Assumption is Wikipedia.movies.json, Movies_metadata.csv, and rating.csv good fi
   
 **Pandas dataframe transform:** 
 
-   1. wiki_movies_df: 
+   1. wiki_movies_df:
+   
       a. Extract a new column ***imdb_link*** from **imdb_id** for a merge key later. It is like a key so dataframe needs to remove duplicated rows
       b. Remove all columns that have more than 90% values NaN
       c. Extract a new column ***box_office*** from **Box office** column and ***budget*** from **Budget** column. Then drop two columns **Box office** and **Budget**. This process converts the text to number by using custom functions. The custom functions are heavy to use regular expressions for two patterns
@@ -112,6 +109,7 @@ Assumption is Wikipedia.movies.json, Movies_metadata.csv, and rating.csv good fi
          r'(\d+)\s*ho?u?r?s?\s*(\d*)|(\d+)\s*m'
       ```
    2. kaggle_metadata_df:
+   
       a. Convert the **Adult** column to a boolean column
       b. Filter the dataframe with **Adult** is false, drop the **Adult** column
       c. Convert the **budget**, **id**, **popularity** columns to number with pandas built-in function **to_numeric** with *errors* option **coerce** (invalid parsing will be set as NaN). If one value is not a number, the process will raise error and the ETL process will be interrupt or halted.
