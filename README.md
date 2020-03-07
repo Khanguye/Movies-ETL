@@ -135,7 +135,9 @@ Assumption is Wikipedia.movies.json, Movies_metadata.csv, and rating.csv good fi
       Vote_Numbers Desc
    LIMIT 10;
    ```
+   
    ![top10_5stars_ratings.png](top10_5stars_ratings.png)
+   
    2. Select movies that Arnold Schwarzenegger played  and received voting 4 starts up
    ```
    SELECT
@@ -150,7 +152,9 @@ Assumption is Wikipedia.movies.json, Movies_metadata.csv, and rating.csv good fi
    ORDER BY 
       Vote_Numbers Desc
    ```
+   
    ![Arnold_Schwarzenegger_4starts_up_ratings.png](Arnold_Schwarzenegger_4starts_up_ratings.png)
+   
    3. Select movies that are directed by Michael Bay or James Cameron with budget greater than 100 Millions
    ```sql
    SELECT
@@ -163,6 +167,7 @@ Assumption is Wikipedia.movies.json, Movies_metadata.csv, and rating.csv good fi
 	   And (m.director like '%Michael Bay%' OR m.director like '%James Cameron%')
    Order by m.director, m.budget desc
    ```
+   
    ![Michael_Bay_OR_James_Cameron.png](Michael_Bay_OR_James_Cameron.png)
    
    
