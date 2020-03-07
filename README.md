@@ -118,8 +118,8 @@ Assumption is Wikipedia.movies.json, Movies_metadata.csv, and rating.csv good fi
    2. Read the data from ratings.csv to dataframe by chunk, then load data to PostgreSQL, and repeat again until read to end of file
       - Total Imported Rows: 26024289
       
-**Let do data queries in PostgreSQL**
-
+**PostgreSQL Queries**
+---
    1. Select the top 10 movies that received the most voting 5 starts count
    ```sql
    SELECT
@@ -139,7 +139,7 @@ Assumption is Wikipedia.movies.json, Movies_metadata.csv, and rating.csv good fi
    ![top10_5stars_ratings.png](top10_5stars_ratings.png)
    
    2. Select movies that Arnold Schwarzenegger played  and received voting 4 starts up
-   ```
+   ```sql
    SELECT
       m.Title, m.director, m.starring, m.wikipedia_url, m.runtime, m.release_date, Count(r.rating) As Vote_Numbers
    FROM 
