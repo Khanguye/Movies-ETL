@@ -35,13 +35,16 @@ Data strategy to load to Pandas dataframe:
    1. Load the file to object with JSON module function. Assumption JSON return a list of dictionary movie object.
    2. Filter only movies from the list 
       a. Assumption every item in the list is a dictionary. To make sure only extract list item is dictionary item, we can add the type condition
+      
       ```
       def filter_movies
          ...
          type(movie) == dict
       ...
       ```
+      
       b. Assumption every dictionary item has the similar structure. To make sure to not add the item is not movie dictionary structure, we can skip all bad item 
+      
       ```
       def clean_movie(movie)
          try:
@@ -49,6 +52,7 @@ Data strategy to load to Pandas dataframe:
          except:
       ...
       ```
+      
    3. Load to the list of movies to Panda dataframe (***wiki_movies_df***)
    
 - Movies_metadata.csv: (This will merge with  Wikipedia.movies)
@@ -63,6 +67,7 @@ Pandas dataframe transform:
       a. Extract a new column ***imdb_link*** from **imdb_id** for a merge key later. It is like a key so dataframe needs to remove duplicated rows
       b. Remove all columns that have more than 90% values NaN
       c. Extract a new column ***box_office*** from **Box office** column and ***budget*** from **Budget** column. Then drop two columns **Box office** and **Budget**. This process converts the text to number by using custom functions. 
+      
       ```
       def parse_dollars(s):
          #Parse a string in patterns to a number
@@ -70,12 +75,16 @@ Pandas dataframe transform:
          #Parse a column string in patterns to a new column number
          #Then drop the column string
       ```
+      
       The custom functions are heavy to use regular expressions for two patterns
+      
       ```
       form_one = r'\$\s*\d+\.?\d*\s*[mb]illi?on'
       form_two = r'\$\s*\d{1,3}(?:[,\.]\d{3})+(?!\s[mb]illion)'
       ```
+      
       d. Extract a new column ***release_date*** from **Release date** column. The procces is similar like above step (c), but the patterns are
+      
       ```
         #date patterns
         # May 17, 1990
@@ -87,5 +96,6 @@ Pandas dataframe transform:
         # 2018
         date_form_four = r'\d{4}'
       ```
+      
       e. Ex
 
