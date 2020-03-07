@@ -78,7 +78,9 @@ Assumption is Wikipedia.movies.json, Movies_metadata.csv, and rating.csv good fi
    1. wiki_movies_df:
    
       a. Extract a new column ***imdb_link*** from **imdb_id** for a merge key later. It is like a key so dataframe needs to remove duplicated rows
+      
       b. Remove all columns that have more than 90% values NaN
+      
       c. Extract a new column ***box_office*** from **Box office** column and ***budget*** from **Budget** column. Then drop two columns **Box office** and **Budget**. This process converts the text to number by using custom functions. The custom functions are heavy to use regular expressions for two patterns
       ```python
       def parse_dollars(s):
@@ -111,8 +113,11 @@ Assumption is Wikipedia.movies.json, Movies_metadata.csv, and rating.csv good fi
    2. kaggle_metadata_df:
    
       a. Convert the **Adult** column to a boolean column
+      
       b. Filter the dataframe with **Adult** is false, drop the **Adult** column
+      
       c. Convert the **budget**, **id**, **popularity** columns to number with pandas built-in function **to_numeric** with *errors* option **coerce** (invalid parsing will be set as NaN). If one value is not a number, the process will raise error and the ETL process will be interrupt or halted.
+      
       d. Convert the **release_date** column to datetime with pandas built-in function **to_datetime** with *errors* option **coerce**
       
 **Pandas merge dataframes:**
