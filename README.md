@@ -26,7 +26,7 @@
 
 **ETL Process**
 ---
-Assumption is Wikipedia.movies.json, Movies_metadata.csv, and rating.csv that are good files and are good well-form type extension files.
+Assumption is Wikipedia.movies.json, Movies_metadata.csv, and rating.csv good files and good data for file extensions.
 
 Data strategy:
 
