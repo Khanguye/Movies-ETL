@@ -30,7 +30,7 @@ To create an automated pipeline that takes in new data, performs the appropriate
 ---
 Assumption is Wikipedia.movies.json, Movies_metadata.csv, and rating.csv good files and good data for file extensions.
 
-####Data strategy to load to Pandas dataframe:####
+**Data strategy to load to Pandas dataframe:**
 
 - Wikipedia.movies.json: (This will merge with Movies_Metadata)
    
@@ -63,7 +63,7 @@ Assumption is Wikipedia.movies.json, Movies_metadata.csv, and rating.csv good fi
 - rating.csv: (Load to Postgre database) 
    1. Load to Panda dataframe with build-in function
   
-####Pandas dataframe transform:#### 
+**Pandas dataframe transform:** 
 
    1. wiki_movies_df: 
       a. Extract a new column ***imdb_link*** from **imdb_id** for a merge key later. It is like a key so dataframe needs to remove duplicated rows
@@ -103,7 +103,7 @@ Assumption is Wikipedia.movies.json, Movies_metadata.csv, and rating.csv good fi
       c. Convert the **budget**, **id**, **popularity** columns to number with pandas built-in function **to_numeric** with *errors* option **coerce** (invalid parsing will be set as NaN). If one value is not a number, the process will raise error and the ETL process will be interrupt or halted.
       d. Convert the **release_date** column to datetime with pandas built-in function **to_datetime** with *errors* option **coerce**
       
-####Pandas merge dataframes:####
+**Pandas merge dataframes:**
 
    1. **wiki_movies_df** and **kaggle_metadata_df** merge with pandas built-in function **merge** with *inner* join option on the key ***imdb_id*** and suffixes _wiki and _kaggle (If columns are the same names, the suffixes are used to identify a merged source). Let call the merged dataframe **movies_df**
    2. Drop redundant columns in the merged dataframe
@@ -111,10 +111,10 @@ Assumption is Wikipedia.movies.json, Movies_metadata.csv, and rating.csv good fi
    4. Project the final set columns
    5. Rename the final set columns
    
-####Save Data to PostgreSQL####
+**Save Data to PostgreSQL**
 
    1. Save the **movies_df** dataframe to SQL with pandas built-in function **to_sql** with **sqlalchemy** connection engine
    2. Read the data from ratings.csv to dataframe by chunk, then load data to PostgreSQL, and repeat again until read to end of file
 
-####Let Preform Some Data Queries in PostgreSQL####
+**Let Preform Some Data Queries in PostgreSQL**
    
