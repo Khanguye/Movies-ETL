@@ -23,3 +23,24 @@
 **Wikipedia.movies** (extract ***imdb_id***)<-inner->(***imdb_id***)**Movies_metadata**(id or (***kaggle_id***)<-left->(**id**) **rating**
 
 ![ETL_Process.png](ETL_Process.png)
+
+**ETL Process**
+---
+Assumption is Wikipedia.movies.json, Movies_metadata.csv, and rating.csv that are good files and are good well-form type extension files.
+
+Data strategy:
+
+- Wikipedia.movies.json: (This will merge with Movies_Metadata)
+   
+   1. Load the file to object with JSON module function. Assumption JSON return a list of dictionary movie object.
+   2. Filter only movies from the list 
+   3. Transform movies into the uniform well-form dictionary movie objects
+   4. Load to the list of movies to Panda dataframe
+   
+- Movies_metadata.csv: (This will merge with  Wikipedia.movies)
+   1. Load to Panda dataframe with build-in function
+
+- rating.csv: (Load to Postgre database) 
+   1. Load to Panda dataframe with build-in function
+   2. Connection database and save dataframe to database table
+   
