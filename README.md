@@ -114,7 +114,55 @@ Assumption is Wikipedia.movies.json, Movies_metadata.csv, and rating.csv good fi
 **Save Data to PostgreSQL**
 
    1. Save the **movies_df** dataframe to SQL with pandas built-in function **to_sql** with **sqlalchemy** connection engine
+      - Total Imported Rows: 6051
    2. Read the data from ratings.csv to dataframe by chunk, then load data to PostgreSQL, and repeat again until read to end of file
+      - Total Imported Rows: 26024289
+      
+**Let do data queries in PostgreSQL**
 
-**Let Preform Some Data Queries in PostgreSQL**
+   1. Select the top 10 movies that received the most voting 5 starts count
+   ```sql
+   SELECT
+      m.Title, m.director, m.starring, m.wikipedia_url, m.runtime, m.release_date, Count(r.rating) As Vote_Numbers
+   FROM 
+      movies m LEFT JOIN ratings r 
+               ON m.kaggle_id = r."movieId"
+   WHERE 
+      r.rating = 5
+   GROUP BY 
+      m.Title, m.director, m.starring, m.wikipedia_url, m.runtime, m.release_date,m.popularity
+   ORDER BY 
+      Vote_Numbers Desc
+   LIMIT 10;
+   ```
+   ![top10_5stars_ratings.png](top10_5stars_ratings.png)
+   2. Select movies that Arnold Schwarzenegger played  and received voting 4 starts up
+   ```
+   SELECT
+      m.Title, m.director, m.starring, m.wikipedia_url, m.runtime, m.release_date, Count(r.rating) As Vote_Numbers
+   FROM 
+      movies m LEFT JOIN ratings r 
+				ON m.kaggle_id = r."movieId"
+   WHERE 
+      r.rating > 4 and m.starring like '%Arnold Schwarzenegger%'
+   GROUP BY 
+      m.Title, m.director, m.starring, m.wikipedia_url, m.runtime, m.release_date,m.popularity
+   ORDER BY 
+      Vote_Numbers Desc
+   ```
+   ![Arnold_Schwarzenegger_4starts_up_ratings.png](Arnold_Schwarzenegger_4starts_up_ratings.png)
+   3. Select movies that are directed by Michael Bay or James Cameron with budget greater than 100 Millions
+   ```sql
+   SELECT
+	   m.Title, m.director, m.starring, m.wikipedia_url, m.runtime, m.release_date, m.budget, m.country
+   FROM 
+	   movies m 
+   Where 
+	   budget is not null 
+	   And budget > 100000000
+	   And (m.director like '%Michael Bay%' OR m.director like '%James Cameron%')
+   Order by m.director, m.budget desc
+   ```
+   ![Michael_Bay_OR_James_Cameron.png](Michael_Bay_OR_James_Cameron.png)
+   
    
