@@ -2,7 +2,9 @@
 
 **Summary**
 ---
+
 To create an automated pipeline that takes in new data, performs the appropriate transformations, and loads the data into existing tables. The requirement needs to handle data errors or unexpected data more robust
+
 **Software:**
 ---
 1. Download 7zip to merge and unzip data sources
